@@ -8,7 +8,9 @@ import (
 func main() {
 	mux := http.NewServeMux()
 
+	mux.HandleFunc("/", homeHandler) // root, default route
 	mux.HandleFunc("/hello", helloHandler)
+	mux.HandleFunc("/mario", marioHandler)
 
 	log.Println("Stating web on port 8080")
 
@@ -17,6 +19,20 @@ func main() {
 	}
 }
 
+func homeHandler(w http.ResponseWriter, r *http.Request) {
+	log.Println(r.URL.Path)
+
+	if r.URL.Path != "/" {
+		http.NotFound(w, r)
+		return
+	}
+	w.Write([]byte("Welcome to Home"))
+}
+
 func helloHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Halo dunia, saya sedang belajar Golang web"))
+}
+
+func marioHandler(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Mario from Nintendo"))
 }
