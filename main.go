@@ -8,9 +8,17 @@ import (
 func main() {
 	mux := http.NewServeMux()
 
+	aboutHandler := func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("About Page"))
+	}
+
 	mux.HandleFunc("/", homeHandler) // root, default route
 	mux.HandleFunc("/hello", helloHandler)
 	mux.HandleFunc("/mario", marioHandler)
+	mux.HandleFunc("/about", aboutHandler)
+	mux.HandleFunc("/profile", func(w http.ResponseWriter, r *http.Request) { // anonymous function
+		w.Write([]byte("Profile Page"))
+	})
 
 	log.Println("Stating web on port 8080")
 
