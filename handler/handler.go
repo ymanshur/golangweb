@@ -72,8 +72,12 @@ func ProductHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	data := map[string]any{
-		"title":   "I'm Learning Golang Web | Product",
-		"product": entity.Product{ID: 1, Name: "Mobilio", Price: 220000000, Stock: 3},
+		"title": "I'm Learning Golang Web | Product",
+		"products": []entity.Product{
+			{ID: 1, Name: "Mobilio", Price: 220000000, Stock: 3},
+			{ID: 2, Name: "Xpander", Price: 270000000, Stock: 2},
+			{ID: 3, Name: "Pajero Sport", Price: 500000000, Stock: 4},
+		},
 	}
 
 	if err := tmpl.Execute(w, data); err != nil {
