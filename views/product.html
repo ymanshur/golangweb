@@ -4,9 +4,7 @@
 {{ range .products }}
 <div class="text">
     {{ .ID }}. {{ .Name }} - {{ .Price }}
-    {{ if lt .Stock 3}}
-        <span class="text-danger">Stock hampir habis!</span>
-    {{ end }}
+    <span class="text-danger">{{ .StockStatus }}</span>
 </div>
 {{ end }}
 
