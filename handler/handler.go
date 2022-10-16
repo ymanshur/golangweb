@@ -17,7 +17,10 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	template, err := template.ParseFiles(path.Join("views", "index.html"))
+	template, err := template.ParseFiles(
+		path.Join("views", "index.html"),
+		path.Join("views", "layout.html"),
+	)
 	if err != nil {
 		log.Println(err)
 		// log.Fatalln(err)
