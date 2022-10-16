@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"fmt"
+	"golangweb/entity"
 	"html/template"
 	"log"
 	"net/http"
@@ -17,7 +17,7 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	template, err := template.ParseFiles(
+	tmpl, err := template.ParseFiles(
 		path.Join("views", "index.html"),
 		path.Join("views", "layout.html"),
 	)
@@ -34,7 +34,7 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// w.Write([]byte("Welcome to Home"))
-	if err := template.Execute(w, data); err != nil {
+	if err := tmpl.Execute(w, data); err != nil {
 		log.Println(err)
 		http.Error(w, "Error is happening, keep calm", http.StatusInternalServerError)
 		return
@@ -59,5 +59,26 @@ func ProductHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// w.Write([]byte("Product Page"))
-	fmt.Fprintf(w, "Product Page: %d", idNum)
+	// fmt.Fprintf(w, "Product Page: %d", idNum)
+
+	tmpl, err := template.ParseFiles(
+		path.Join("views", "product.html"),
+		path.Join("views", "layout.html"),
+	)
+	if err != nil {
+		log.Println(err)
+		http.Error(w, "Error is happening, keep calm", http.StatusInternalServerError)
+		return
+	}
+
+	data := map[string]any{
+		"title":   "I'm Learning Golang Web | Product",
+		"product": entity.Product{ID: 1, Name: "Mobilio", Price: 220000000, Stock: 3},
+	}
+
+	if err := tmpl.Execute(w, data); err != nil {
+		log.Println(err)
+		http.Error(w, "Error is happening, keep calm", http.StatusInternalServerError)
+		return
+	}
 }
