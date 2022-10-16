@@ -25,8 +25,13 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	data := map[string]string{
+		"title":   "I'm Learning Golang Web",
+		"content": "I'm learning Golang Web with Agung Setiawan",
+	}
+
 	// w.Write([]byte("Welcome to Home"))
-	if err := template.Execute(w, nil); err != nil {
+	if err := template.Execute(w, data); err != nil {
 		log.Println(err)
 		http.Error(w, "Error is happening, keep calm", http.StatusInternalServerError)
 		return
