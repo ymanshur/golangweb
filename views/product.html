@@ -2,7 +2,7 @@
 {{ define "main" }}
 
 {{ range .products }}
-<div class="text">
+<div class="box-with-shadow">
     {{ .ID }}. {{ .Name }} - {{ .Price }}
     <span class="text-danger">{{ .StockStatus }}</span>
 </div>
