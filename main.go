@@ -22,6 +22,9 @@ func main() {
 	})
 	mux.HandleFunc("/product", handler.ProductHandler)
 
+	fileServer := http.FileServer(http.Dir("assets"))
+	mux.Handle("/static/", http.StripPrefix("/static", fileServer))
+
 	log.Println("Stating web on port 8080")
 
 	if err := http.ListenAndServe("127.0.0.1:8080", mux); err != nil {
