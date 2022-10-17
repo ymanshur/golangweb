@@ -1,0 +1,18 @@
+.header {
+    margin-bottom: 30px;
+}
+
+.box-with-shadow {
+    border: 1px solid;
+    padding: 10px;
+    box-shadow: 5px 10px black;
+    margin-bottom: 30px;
+}
+
+.text {
+    color: blue;
+}
+
+.text-danger {
+    color: red !important;
+}
